@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ResearchPortal.Areas.Identity.Configurations;
+using ResearchPortal.Areas.Identity.Services;
 
 namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
 {
@@ -15,16 +17,17 @@ namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailService _emailSender;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IEmailConfigurations _emailCofigurations)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            _emailSender = new EmailService(_emailCofigurations);
         }
 
         public string Username { get; set; }
@@ -135,7 +138,7 @@ namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
+            await _emailSender.SendEmailUsingSendGridAsync(
                 email,
                 "Confirm your email",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");

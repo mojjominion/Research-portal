@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/ResearchPortal/Areas/Identity/Configurations/IEmailConfigurations.cs
+/ResearchPortal/IEmailConfiguration.cs

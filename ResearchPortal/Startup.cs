@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using ResearchPortal.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ResearchPortal.Areas.Identity.Services;
+using ResearchPortal.Areas.Identity.Configurations;
 
 namespace ResearchPortal
 {
@@ -41,6 +44,8 @@ namespace ResearchPortal
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IEmailSender, EmailService>();
+            services.AddSingleton<IEmailConfigurations>(Configuration.GetSection("EmailConfiguration").Get<EmailConfigurations>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
