@@ -24,7 +24,7 @@ namespace ResearchPortal.Areas.Identity.Services
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("mojjominion@gmail.com", "heylelouch0")
+                Credentials = new NetworkCredential("abc@gmail.com", "h3idehn")
             };
             var mailMessage = new MailMessage
             {

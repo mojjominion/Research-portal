@@ -3,173 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResearchPortal.Data;
 
 namespace ResearchPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190328194058_ModelsAdded")]
+    partial class ModelsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.Article", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AuthorId");
-
-                    b.Property<string>("AuthorId1");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("HtmlContent");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId1");
-
-                    b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ArticleCommentsMappings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("ArticleId");
-
-                    b.Property<long?>("CommentId");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("ArticleCommentsMappings");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.Comment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AuthorId");
-
-                    b.Property<string>("AuthorId1");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<string>("Text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId1");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearcherArticleMappings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("ArticleId");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<string>("ResearcherId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("ResearcherId");
-
-                    b.ToTable("ResearcherArticleMappings");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearcherCommentsMappings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("CommentId");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<string>("ResearcherId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("ResearcherId");
-
-                    b.ToTable("ResearcherCommentsMappings");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearchTopic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AuthorId");
-
-                    b.Property<string>("AuthorId1");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("HtmlContent");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId1");
-
-                    b.ToTable("ResearchTopics");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -225,9 +75,6 @@ namespace ResearchPortal.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -267,8 +114,6 @@ namespace ResearchPortal.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -339,75 +184,6 @@ namespace ResearchPortal.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.Researcher", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator().HasValue("Researcher");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.Article", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Researcher", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId1");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ArticleCommentsMappings", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId");
-
-                    b.HasOne("MasterDbStorage.DbModels.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.Comment", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Researcher", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId1");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearcherArticleMappings", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId");
-
-                    b.HasOne("MasterDbStorage.DbModels.Researcher", "Researcher")
-                        .WithMany()
-                        .HasForeignKey("ResearcherId");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearcherCommentsMappings", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("MasterDbStorage.DbModels.Researcher", "Researcher")
-                        .WithMany()
-                        .HasForeignKey("ResearcherId");
-                });
-
-            modelBuilder.Entity("MasterDbStorage.DbModels.ResearchTopic", b =>
-                {
-                    b.HasOne("MasterDbStorage.DbModels.Researcher", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
