@@ -31,4 +31,18 @@
     <ProjectReference Include="..\MasterDbStorage\MasterDbStorage.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Articles\Data\" />
+    <Folder Include="Areas\Articles\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Articles\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Articles\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
