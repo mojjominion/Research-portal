@@ -6,20 +6,20 @@ using MasterDbStorage.DbModels;
 using MasterDbStorage.MasterDbContext;
 using MasterDbStorage.DbRespository;
 using Microsoft.AspNetCore.Authorization;
-using ResearchPortal.Areas.Articles.Models;
+using ResearchPortal.Areas.Portal.Models;
 
-namespace ResearchPortal.Areas.Articles.Controllers
+namespace ResearchPortal.Areas.Portal.Controllers
 {
-    [Area("Articles")]
+    [Area("Portal")]
     public class ArticlesController : Controller
     {
-        private readonly MasterDBContext _context;
+        private readonly MasterDBContext _db;
         private readonly ArticleRepository _articleRepository;
 
-        public ArticlesController(MasterDBContext context)
+        public ArticlesController(MasterDBContext db)
         {
-            _context = context;
-            _articleRepository = new ArticleRepository(context);
+            _db = db;
+            _articleRepository = new ArticleRepository(db);
 
         }
 
@@ -58,7 +58,7 @@ namespace ResearchPortal.Areas.Articles.Controllers
             if (ModelState.IsValid)
             {
                 _articleRepository.Add(article);
-                _context.SaveChanges();
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(article);
@@ -93,8 +93,8 @@ namespace ResearchPortal.Areas.Articles.Controllers
             {
                 try
                 {
-                    _context.Update(article);
-                    await _context.SaveChangesAsync();
+                    _db.Update(article);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,13 +137,13 @@ namespace ResearchPortal.Areas.Articles.Controllers
         {
             var article = _articleRepository.Get(id);
             _articleRepository.Remove(article);
-            _context.SaveChanges();
+            _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArticleExists(long id)
         {
-            return _context.Articles.Any(e => e.Id == id);
+            return _db.Articles.Any(e => e.Id == id);
         }
     }
 }

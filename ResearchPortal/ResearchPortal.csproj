@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Articles\Data\" />
+    <Folder Include="Areas\Portal\Data\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Areas\Articles\Views\_ViewImports.cshtml">
+    <Content Update="Areas\Portal\Views\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\Articles\Views\_ViewStart.cshtml">
+    <Content Update="Areas\Portal\Views\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

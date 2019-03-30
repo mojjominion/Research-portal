@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResearchPortal.Areas.Articles.Models
+namespace ResearchPortal.Areas.Portal.Models
 {
     public class ArticleViewModel
     {

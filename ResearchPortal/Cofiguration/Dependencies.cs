@@ -26,6 +26,8 @@ namespace ResearchPortal.Cofiguration
             services.AddSingleton<IEmailConfigurations>(config.GetSection("EmailConfiguration").Get<EmailConfigurations>());
 
             services.AddScoped<IArticlesRepository, ArticleRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ITopicsRepository, TopicsRepository>();
         }
     }
 }
