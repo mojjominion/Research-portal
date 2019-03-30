@@ -42,6 +42,7 @@ namespace ResearchPortal.Areas.Portal.Controllers
         }
 
         // GET: Articles/Articles/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -65,6 +66,7 @@ namespace ResearchPortal.Areas.Portal.Controllers
         }
 
         // GET: Articles/Articles/Edit/5
+        [Authorize]
         public IActionResult Edit(long id)
         {
             var article = _articleRepository.Get(id);
@@ -113,6 +115,7 @@ namespace ResearchPortal.Areas.Portal.Controllers
         }
 
         // GET: Articles/Articles/Delete/5
+        [Authorize]
         public IActionResult Delete(long id)
         {
             //if (id == null)
