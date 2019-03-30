@@ -7,9 +7,12 @@ using System.Text;
 
 namespace MasterDbStorage.DbModels
 {
-    [Table("AspNetUsers")]
+    [Table("Researchers")]
     public class Researcher : IdentityUser, ICreation, IDeletable
     {
+        public long LongId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdated { get; set; }
         public bool IsDeleted { get; set; }

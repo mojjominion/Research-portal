@@ -1,47 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MasterDbStorage.DbModels;
-using ResearchPortal.Data;
+using MasterDbStorage.MasterDbContext;
+using MasterDbStorage.DbRespository;
+using Microsoft.AspNetCore.Authorization;
+using ResearchPortal.Areas.Articles.Models;
 
 namespace ResearchPortal.Areas.Articles.Controllers
 {
     [Area("Articles")]
     public class ArticlesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly MasterDBContext _context;
+        private readonly ArticleRepository _articleRepository;
 
-        public ArticlesController(ApplicationDbContext context)
+        public ArticlesController(MasterDBContext context)
         {
             _context = context;
+            _articleRepository = new ArticleRepository(context);
+
         }
 
         // GET: Articles/Articles
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Articles.ToListAsync());
+            return View(_articleRepository.GetAll());
         }
 
         // GET: Articles/Articles/Details/5
-        public async Task<IActionResult> Details(long? id)
+        public IActionResult Details(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var article = await _context.Articles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var article = _articleRepository.Get(id);
             if (article == null)
             {
                 return NotFound();
             }
-
-            return View(article);
+            var articleViewModel = new ArticleViewModel();
+            return View(articleViewModel.FromDbModel(article));
         }
 
         // GET: Articles/Articles/Create
@@ -55,31 +52,28 @@ namespace ResearchPortal.Areas.Articles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,HtmlContent,Id,AuthorId,CreatedAt,LastUpdated,IsDeleted")] Article article)
+        [Authorize]
+        public IActionResult Create(Article article)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(article);
-                await _context.SaveChangesAsync();
+                _articleRepository.Add(article);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(article);
         }
 
         // GET: Articles/Articles/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public IActionResult Edit(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var article = await _context.Articles.FindAsync(id);
+            var article = _articleRepository.Get(id);
             if (article == null)
             {
                 return NotFound();
             }
-            return View(article);
+            var articleViewModel = new ArticleViewModel();
+            return View(articleViewModel.FromDbModel(article));
         }
 
         // POST: Articles/Articles/Edit/5
@@ -87,6 +81,7 @@ namespace ResearchPortal.Areas.Articles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(long id, [Bind("Name,Description,HtmlContent,Id,AuthorId,CreatedAt,LastUpdated,IsDeleted")] Article article)
         {
             if (id != article.Id)
@@ -118,15 +113,14 @@ namespace ResearchPortal.Areas.Articles.Controllers
         }
 
         // GET: Articles/Articles/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        public IActionResult Delete(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var article = await _context.Articles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var article = _articleRepository.Get(id);
             if (article == null)
             {
                 return NotFound();
@@ -138,11 +132,12 @@ namespace ResearchPortal.Areas.Articles.Controllers
         // POST: Articles/Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        [Authorize]
+        public IActionResult DeleteConfirmed(long id)
         {
-            var article = await _context.Articles.FindAsync(id);
-            _context.Articles.Remove(article);
-            await _context.SaveChangesAsync();
+            var article = _articleRepository.Get(id);
+            _articleRepository.Remove(article);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

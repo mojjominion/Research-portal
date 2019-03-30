@@ -8,7 +8,7 @@ namespace MasterDbStorage.DbModels
     public class BaseClass : ICreation, IDeletable
     {
         public long Id { get; set; }
-        public long? AuthorId { get; set; }
+        public string AuthorId { get; set; }
         public Researcher Author { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdated { get; set; }

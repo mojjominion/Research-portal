@@ -10,7 +10,6 @@ namespace MasterDbStorage.DbModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string HtmlContent { get; set; }
-        public long? AuthorId { get; set; }
         public Researcher Author { get; set; }
     }
 }

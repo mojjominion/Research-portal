@@ -30,6 +30,7 @@ namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
             _emailSender = new EmailService(_emailCofigurations);
         }
 
+        public string FullName { get; set; }
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -42,6 +43,9 @@ namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
             [Required]
             [EmailAddress]
             public string Email { get; set; }
@@ -67,6 +71,7 @@ namespace ResearchPortal.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FullName = user.NormalizedUserName,
                 Email = email,
                 PhoneNumber = phoneNumber
             };

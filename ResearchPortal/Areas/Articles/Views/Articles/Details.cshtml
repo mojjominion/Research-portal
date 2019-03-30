@@ -1,4 +1,4 @@
-﻿@model MasterDbStorage.DbModels.Article
+﻿@model ResearchPortal.Areas.Articles.Models.ArticleViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -17,6 +17,18 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TopicName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
@@ -27,30 +39,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.HtmlContent)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastUpdated)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastUpdated)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
         </dd>
     </dl>
 </div>

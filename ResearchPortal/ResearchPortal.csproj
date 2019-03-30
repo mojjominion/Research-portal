@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20190327202017_initial.cs" />
-    <Compile Remove="Data\Migrations\20190327202017_initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190327202954_first.cs" />
-    <Compile Remove="Data\Migrations\20190327202954_first.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190328182516_DbModelsAdded.cs" />
+    <Compile Remove="Migrations\20190330155926_restructured.cs" />
+    <Compile Remove="Migrations\20190330160623_Researchers_table.cs" />
+    <Compile Remove="Migrations\20190330161952_Initial.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,12 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MasterDbStorage\MasterDbStorage.csproj" />
+    <Folder Include="Areas\Articles\Data\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Articles\Data\" />
-    <Folder Include="Areas\Articles\Models\" />
+    <ProjectReference Include="..\MasterDbStorage\MasterDbStorage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

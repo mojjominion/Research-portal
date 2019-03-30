@@ -1,4 +1,4 @@
-﻿@model MasterDbStorage.DbModels.Article
+﻿@model ResearchPortal.Areas.Articles.Models.ArticleViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -24,31 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="HtmlContent" class="control-label"></label>
-                <input asp-for="HtmlContent" class="form-control" />
+                <textarea asp-for="HtmlContent" class="form-control"></textarea>
                 <span asp-validation-for="HtmlContent" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <input asp-for="AuthorId" class="form-control" />
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastUpdated" class="control-label"></label>
-                <input asp-for="LastUpdated" class="form-control" />
-                <span asp-validation-for="LastUpdated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                    </label>
-                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

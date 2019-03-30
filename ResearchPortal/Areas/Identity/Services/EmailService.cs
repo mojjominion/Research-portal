@@ -38,7 +38,7 @@ namespace ResearchPortal.Areas.Identity.Services
         }
         public Task SendEmailUsingSendGridAsync(string email, string subject, string htmlMessage)
         {
-            var apiKey = _EmailConfiguration.Password;
+            var apiKey = _EmailConfiguration.ApiKey;
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(_EmailConfiguration.FromEmail, _EmailConfiguration.FromUser);
             var to = new EmailAddress(email, email);
